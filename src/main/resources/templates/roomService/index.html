@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head('room')}">
+</head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+<aside th:replace="~{layout :: sidebar}"></aside>
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Room Service</h5>
+                        <form method="get" th:action="@{/roomService}" class="row row-cols-lg-auto g-3 align-items-center" th:object="${dto}">
+                            <div class="col-12">
+                                <input type="text" class="form-control"
+                                       placeholder="Number" name="employeeNumber" th:value="*{employeeNumber}">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control"
+                                       placeholder="Full Name" name="fullName" th:value="*{fullName}">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </form>
+
+                            <button type="button" class="btn btn-outline-primary btnAddRoomService" data-bs-toggle="modal" data-bs-target="#addRoomService">Add New Room Service</button>
+
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Number</th>
+                                <th>Full Name</th>
+                                <th>Outsourching Company</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="roomService : ${roomServices}">
+                                <td>
+                                    <a  class="updateRoomService" data-bs-placement="bottom" data-bs-original-title="Edit" data-bs-toggle="modal" data-bs-target="#addRoomService" th:data-id="${roomService.number}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+
+                                    <a th:href="@{/roomService/{id}/roster (id=${roomService.number})}" data-bs-toggle="tooltip"
+                                       data-bs-placement="bottom" data-bs-original-title="Roster">
+                                        <i class="bi bi-collection"></i>
+                                    </a>
+
+                                </td>
+                                <td th:text="${roomService.number}"></td>
+                                <td th:text="${roomService.fullName}"></td>
+                                <td th:text="${roomService.company}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="addRoomService" data-bs-backdrop="false" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Room Service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <label for="employeeNumber" class="col-sm-5 col-form-label">Employee Number</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="employeeNumber">
+                                <div class="validation-message" data-for="employeeNumber"></div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="firstName" class="col-sm-5 col-form-label">First Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="firstName">
+                                <div class="validation-message" data-for="firstName"></div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="middleName" class="col-sm-5 col-form-label">Middle Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="middleName">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="lastName" class="col-sm-5 col-form-label">Last Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="lastName">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="outsourcing" class="col-sm-5 col-form-label">Outsourcing Company</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="outsourcing">
+                                <div class="validation-message" data-for="company"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="submit btn btn-primary submitRoomService">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

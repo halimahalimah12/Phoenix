@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head('Author')}">
+</head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+<aside th:replace="~{layout :: sidebar}"></aside>
+<main id="main" class="main">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Room (Update/Insert)</h5>
+                        <form method="post" th:action="@{/rooms/upsert }" th:object="${dto}"
+                              enctype="multipart/form-data">
+                            <div th:if="${#fields.hasErrors()}"
+                                 class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <ul>
+                                    <li th:each="err : ${#fields.errors()}" th:text="${err}"/>
+                                </ul>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="number" class="col-sm-2 col-form-label">Number*</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="number" id="number"
+                                           th:field="*{number}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="floor" class="col-sm-2 col-form-label">Floor*</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="floor" id="floor"
+                                           th:field="*{floor}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="roomType" class="col-sm-2 col-form-label">Room Type*</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" name="roomType" id="roomType"
+                                            aria-label="Default select example">
+                                        <option th:value="null">Open this select menu</option>
+                                        <option th:each="dropdown :${typeDropdown}"
+                                                th:text="${dropdown.label}"
+                                                th:value="${dropdown.label}"
+                                                th:selected="(*{roomType} == ${dropdown.label})"
+                                        ></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="guestLimit" class="col-sm-2 col-form-label">Guest Limit*</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="guestLimit" id="guestLimit"
+                                           th:value="*{guestLimit}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="cost" class="col-sm-2 col-form-label">Cost*</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" th:field="*{cost}" name="cost" id="cost">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="description" class="col-sm-2 col-form-label">Description*</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="description" id="description"
+                                              th:text="*{description}" th:field="*{description}"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <a th:href="@{/rooms}">
+                                        <button type="button" class="btn btn-primary">Back to index</button>
+                                    </a>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

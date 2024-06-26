@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head('room')}">
+</head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+<aside th:replace="~{layout :: sidebar}"></aside>
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Booking Detail</h5>
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <th scope="row">Room Number</th>
+                                <td>:</td>
+                                <td th:text="${detail.number}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Room Floor</th>
+                                <td>:</td>
+                                <td th:text="${detail.floor}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Room Type</th>
+                                <td>:</td>
+                                <td th:text="${detail.type}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Guest Limit</th>
+                                <td>:</td>
+                                <td th:text="${detail.guestLimit}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Cost</th>
+                                <td>:</td>
+                                <td th:text="${detail.costPerDay}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Description</th>
+                                <td>:</td>
+                                <td th:text="${detail.description}"></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <a th:href="@{/booking/{id}/insert (id=${detail.number}) }"><button type="submit" class="btn btn-primary">Make Reservation</button></a>
+                                <button type="submit" class="btn btn-primary">Cencel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

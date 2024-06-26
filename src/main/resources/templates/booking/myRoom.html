@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head('room')}">
+</head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+<aside th:replace="~{layout :: sidebar}"></aside>
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">My Room</h5>
+                        <table class="table table-borderless" th:each="detail : ${rooms}">
+                            <tbody>
+                            <tr>
+                                <th scope="row">Room Number</th>
+                                <td>:</td>
+                                <td th:text="${detail.number}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Room Floor</th>
+                                <td>:</td>
+                                <td th:text="${detail.floor}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Room Type</th>
+                                <td>:</td>
+                                <td th:text="${detail.roomType}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Guest Limit</th>
+                                <td>:</td>
+                                <td th:text="${detail.guestLimit}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Cost</th>
+                                <td>:</td>
+                                <td th:text="${detail.costPerNight}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Check In</th>
+                                <td>:</td>
+                                <td th:text="${detail.checkIn}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Check Out</th>
+                                <td>:</td>
+                                <td th:text="${detail.checkOut}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Total cost</th>
+                                <td>:</td>
+                                <td th:text="${detail.totalCost}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Payment Date</th>
+                                <td>:</td>
+                                <td th:text="${detail.paymentDate}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Payment Method</th>
+                                <td>:</td>
+                                <td th:text="${detail.paymentMethod}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Remark</th>
+                                <td>:</td>
+                                <td th:text="${detail.remark}"></td>
+                            </tr>
+                            </tbody>
+                            <hr>
+
+                        </table>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

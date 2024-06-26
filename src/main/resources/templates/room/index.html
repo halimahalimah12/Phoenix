@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head('room')}">
+</head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+<aside th:replace="~{layout :: sidebar}"></aside>
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Room</h5>
+                        <div th:if="${success}" class="alert alert-success alert-dismissible fade show"
+                             role="alert">
+                            Successfully Added/Update New Room
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <form method="get" th:action="@{/rooms}" class="row row-cols-lg-auto g-3 align-items-center" th:object="${dto}">
+                            <div class="col-12">
+                                <input type="text" class="form-control"
+                                       placeholder="Room" name="room" th:value="*{room}">
+                            </div>
+                            <div class="col-12">
+                                <select class="form-select" name="type" aria-label="Default select example">
+                                    <option th:value="null">Open this select menu</option>
+                                    <option th:each="dropdown :${typeDropdown}"
+                                            th:text="${dropdown.label}"
+                                            th:value="${dropdown.label}"
+                                            th:selected="(*{type} == ${dropdown.label})"
+                                    ></option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </form>
+
+                        <a th:href="@{/rooms/insert}">
+                            <button type="button" class="btn btn-outline-primary">Add Room</button>
+                        </a>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Number</th>
+                                <th>Floor</th>
+                                <th>Type</th>
+                                <th>Guess Limit</th>
+                                <th>Cost Per Day</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="room : ${roomList}">
+                                <td>
+                                    <a th:href="@{/rooms/{id}/update (id=${room.number})}" data-bs-toggle="tooltip"
+                                       data-bs-placement="bottom" data-bs-original-title="Edit Loan">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a th:href="@{/rooms/{id}/inventories (id=${room.number})}" data-bs-toggle="tooltip"
+                                       data-bs-placement="bottom" data-bs-original-title="Item">
+                                        <i class="bi bi-collection"></i>
+                                    </a>
+
+                                </td>
+                                <td th:text="${room.number}"></td>
+                                <td th:text="${room.floor}"></td>
+                                <td th:text="${room.roomType}"></td>
+                                <td th:text="${room.guestLimit}"></td>
+                                <td th:text="${room.cost}"></td>
+                                <td th:text="${room.status}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head('room')}">
+</head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+<aside th:replace="~{layout :: sidebar}"></aside>
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Booking Detail</h5>
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <th scope="row">Room Number</th>
+                                <td>:</td>
+                                <td th:text="${detail.number}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Room Floor</th>
+                                <td>:</td>
+                                <td th:text="${detail.floor}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Room Type</th>
+                                <td>:</td>
+                                <td th:text="${detail.type}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Guest Limit</th>
+                                <td>:</td>
+                                <td th:text="${detail.guestLimit}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Cost</th>
+                                <td>:</td>
+                                <td th:text="${detail.costPerDay}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Description</th>
+                                <td>:</td>
+                                <td th:text="${detail.description}"></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                        <hr>
+
+                        <form method="post" th:action="@{/booking/upsert }"
+                              enctype="multipart/form-data" >
+                            <input type="hidden" name="number" th:field="${detail.number}">
+                            <input type="hidden" name="username" th:field="${guest.username}">
+                            <div class="row mb-3">
+                                <label for="checkIn" class="col-sm-2 col-form-label">Check In</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" name="checkIn" id="checkIn">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="checkOut" class="col-sm-2 col-form-label">Check Out</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" name="checkOut" id="checkOut">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="cost" class="col-sm-2 col-form-label">Total Cost</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="cost" id="cost"
+                                           th:value="${detail.costPerDay}" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="roomType" class="col-sm-2 col-form-label">Payment Method*</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" name="paymentMethod" id="roomType"
+                                            aria-label="Default select example">
+                                        <option th:value="null">Open this select menu</option>
+                                        <option th:each="dropdown :${paymentMethod}"
+                                                th:text="${dropdown.label}"
+                                                th:value="${dropdown.label}"
+                                        ></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="reservationMethod" class="col-sm-2 col-form-label">Reservation Method*</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" name="reservationMethod" id="reservationMethod"
+                                            aria-label="Default select example">
+                                        <option th:value="null">Open this select menu</option>
+                                        <option th:each="dropdown :${reservationMethod}"
+                                                th:text="${dropdown.label}"
+                                                th:value="${dropdown.label}"
+                                        ></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="remark" class="col-sm-2 col-form-label">Remark</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="remark" id="remark"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <a th:href="@{/rooms}">
+                                        <button type="button" class="btn btn-primary">Back to index</button>
+                                    </a>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

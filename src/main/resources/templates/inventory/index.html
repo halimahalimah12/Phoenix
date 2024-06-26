@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head('room')}">
+</head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+<aside th:replace="~{layout :: sidebar}"></aside>
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Inventory</h5>
+                        <div class=" alert alert-success alert-dismissible fade show success-alert"
+                             role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary addInventory" data-bs-toggle="modal" data-bs-target="#addInventory">Add New Inventory</button>
+
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Name</th>
+                                <th>Stock</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="inventory : ${inventoryList}">
+                                <td>
+                                    <button type="button" class="btn btn-outline-primary editInventory" data-bs-toggle="modal" data-bs-target="#editInventory" th:data-id="${inventory.name}">Edit</button>
+                                    <button type="button" class="btn btn-outline-primary deleteInventory" th:data-id="${inventory.name}">Delete</button>
+                                </td>
+                                <td th:text="${inventory.name}"></td>
+                                <td th:text="${inventory.stock}"></td>
+                                <td th:text="${inventory.description}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="addInventory" data-bs-backdrop="false" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Inventory</h5>
+                </div>
+                <form class="formInventory">
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <label for="name" class="col-sm-3 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control " id="name" >
+                                <div class="validation-message" data-for="name"></div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="stock" class="col-sm-3 col-form-label">Stock</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control " id="stock" >
+                                <div class="validation-message" data-for="stock"></div>
+
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="stock" class="col-sm-3 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" maxlength="100px" id="description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="submit btn btn-primary submitInventory">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+ <div class="modal fade" id="editInventory" data-bs-backdrop="false" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Inventory</h5>
+                </div>
+                <form class="formInventory">
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <label for="name" class="col-sm-3 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="editName" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="stock" class="col-sm-3 col-form-label">Stock</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="editStock">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="stock" class="col-sm-3 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" maxlength="100px" id="editDescription"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="submit btn btn-primary submitEditInventory">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

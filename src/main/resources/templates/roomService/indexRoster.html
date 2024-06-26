@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head('Room Service')}">
+</head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+<aside th:replace="~{layout :: sidebar}"></aside>
+<main id="main" class="main">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Room Service(Update/Insert)</h5>
+                        <a th:href="@{/roomService/{id}/update (id=${id})}">
+                            <button type="button" class="btn btn-outline-primary ">Edit</button>
+                        </a>
+                        <table class="table table-borderless" th:object="${dto}">
+                            <tbody>
+                            <tr>
+                                <th>Employee Number</th>
+                                 <td><span th:text="*{employeeNumber}"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Full Name</th>
+                                <td th:text="*{fullName}"></td>
+                            </tr>
+                            <tr>
+                                <th>Outsourching Company</th>
+                                <td th:text="*{company}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <table class="table table-borderless" th:object="${dto}">
+                            <tbody>
+                            <tr>
+                                <th>Monday</th>
+                                <td><span th:text="*{mondayRosterStart}"></span> - <span th:text="*{mondayRosterFinish}"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Tuesday</th>
+                                 <td><span th:text="*{tuesdayRosterStart}"></span> - <span th:text="*{tuesdayRosterFinish}"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Wednesday</th>
+                                 <td><span th:text="*{wednesdayRosterStart}"></span> - <span th:text="*{wednesdayRosterFinish}"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Thursday</th>
+                                 <td><span th:text="*{thursdayRosterStart}"></span> - <span th:text="*{thursdayRosterFinish}"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Friday</th>
+                                 <td><span th:text="*{fridayRosterStart}"></span> - <span th:text="*{fridayRosterFinish}"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Saturday</th>
+                                 <td><span th:text="*{saturdayRosterStart}"></span> - <span th:text="*{saturdayRosterFinish}"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Sunday</th>
+                                 <td><span th:text="*{sundayRosterStart}"></span> - <span th:text="*{sundayRosterFinish}"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

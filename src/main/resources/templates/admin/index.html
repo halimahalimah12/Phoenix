@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head('room')}">
+</head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+<aside th:replace="~{layout :: sidebar}"></aside>
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Room Service</h5>
+
+                        <div class=" alert alert-success alert-dismissible fade show success-alert"
+                             role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary btnAddRs"   data-bs-toggle="modal" data-bs-target="#modalAddNewAdmin">Add New Admin</button>
+
+
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Username</th>
+                                <th>Job Title</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="admin : ${adminList}">
+                                <td>
+                                    <a  class="updateAdmin" data-bs-placement="bottom" data-bs-original-title="Edit" data-bs-toggle="modal" data-bs-target="#modalEditAdmin" th:data-id="${admin.username}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                </td>
+                                <td th:text="${admin.username}"></td>
+                                <td th:text="${admin.jobTitle}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="modalAddNewAdmin" data-bs-backdrop="false" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upsert Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible fade show alert-gagal"
+                             role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="usernameAdmin" class="col-sm-3 col-form-label">Username:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="usernameAdmin">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="jobTitle" class="col-sm-3 col-form-label">Job Title:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="jobTitle">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="password" class="col-sm-3 col-form-label" id="passwordLabel">Password:</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="submit btn btn-primary submitAddAdmin">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalEditAdmin" data-bs-backdrop="false" tabindex="-1" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upsert Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible fade show alert-gagal"
+                             role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="usernameAdmin" class="col-sm-3 col-form-label">Username:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="usernameAdminEdit" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="jobTitle" class="col-sm-3 col-form-label">Job Title:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="jobTitleEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="submit btn btn-primary submitEditAdmin">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

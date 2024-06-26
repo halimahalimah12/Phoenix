@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head('room')}">
+</head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+<aside th:replace="~{layout :: sidebar}"></aside>
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Room</h5>
+                        <table class="table table-borderless" th:object="${dto}">
+                            <tbody>
+                            <tr>
+                                <th>Room Number</th>
+                                <td th:text="*{number}"></td>
+                            </tr>
+                            <tr>
+                                <th>Room Floor</th>
+                                <td th:text="*{floor}"></td>
+                            </tr>
+                            <tr>
+                                <th>Room Type</th>
+                                <td th:text="*{roomType}"></td>
+                            </tr>
+                            <tr>
+                                <th>Guest Limit</th>
+                                <td th:text="*{guestLimit}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <button type="button" class="btn btn-outline-primary addItem" data-bs-toggle="modal" data-bs-target="#addItem">Add New Inventory</button>
+
+
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Inventory</th>
+                                <th>Stock</th>
+                                <th>Quantity</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="inventory : ${inventories}">
+                                <td>
+                                    <button type="button" class="btn btn-outline-primary deleteInventoryRoom" th:data-id="${inventory.id}">Delete</button>
+                                </td>
+                                <td th:text="${inventory.name}"></td>
+                                <td th:text="${inventory.stock}"></td>
+                                <td th:text="${inventory.quantity}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="addItem" data-bs-backdrop="false" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Inventory</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible fade show alert-gagal"
+                             role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <input type="hidden" id="roomNumber" th:value="${dto.number}">
+                        <input type="hidden" id="id">
+                        <div class="row mb-3">
+                            <label for="inventory" class="col-sm-5 col-form-label">Insert Inventory</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" name="type" id="inventory" aria-label="Default select example">
+                                    <option th:value="null">Open this select menu</option>
+                                    <option th:each="dropdown :${inventoryDropdown}"
+                                            th:text="${dropdown.value}"
+                                            th:value="${dropdown.value}"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="quantity" class="col-sm-5 col-form-label">Quantity</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="quantity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="submit btn btn-primary submitInventory">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>
